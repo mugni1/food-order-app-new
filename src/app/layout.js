@@ -65,9 +65,7 @@ export default function RootLayout({ children }) {
           </button>
         </div>
 
-        <h1 className="text-xl font-semibold mb-5 text-slate-900">
-          Best For You
-        </h1>
+        <h1 className="text-xl font-semibold mb-5 text-slate-900">Terbaru</h1>
         {children}
       </body>
     </html>

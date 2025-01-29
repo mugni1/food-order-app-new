@@ -8,8 +8,8 @@ export default function CardImage({ image, name, price }) {
           src={`http://localhost:8000/storage/images/${image}`}
           alt=""
           className="h-full object-cover"
-          height={100}
-          width={200}
+          height={300}
+          width={500}
         />
       </div>
       <div className="flex flex-col items-center justify-center w-full py-3 gap-1">

@@ -1,23 +1,11 @@
 import CardImage from "@/components/CardImage";
-import TextHeader from "@/components/TextHeader";
-
-async function getItems() {
-  try {
-    const res = await fetch("http://localhost:8000/api/items", {
-      method: "GET",
-      cache: "no-store",
-    });
-    return res.json();
-  } catch (error) {
-    throw new Error(error);
-  }
-}
+import { getAllItems } from "@/services";
 
 export default async function Home() {
-  const items = await getItems();
+  const items = await getAllItems();
   return (
     <>
-      <section className="w-full grid grid-cols-2 gap-5">
+      <section className="w-full grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-5">
         {items.data.map((item) => (
           <CardImage
             key={item.id}
