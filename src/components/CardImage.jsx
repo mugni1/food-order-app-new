@@ -5,7 +5,7 @@ export default function CardImage({ image, name, price }) {
     <section className="border rounded-3xl overflow-hidden">
       <div className="h-40 w-full flex items-center justify-center">
         <Image
-          src="http://localhost:8000/storage/images/2025_01_09_38_01_mie_ayam.jpeg"
+          src={`http://localhost:8000/storage/images/${image}`}
           alt=""
           className="h-full object-cover"
           height={100}
@@ -16,9 +16,9 @@ export default function CardImage({ image, name, price }) {
         <h3 className="line-clamp-1 w-full text-center text-lg font-semibold text-slate-800">
           {name}
         </h3>
-        <h3 className="flex text-slate-900 font-semibold text-lg">
+        <h3 className="flex text-slate-900 font-semibold text-lg gap-1 items-center">
           <span className=" text-emerald-600">Rp</span>
-          {price}
+          <span className="text-xl">{price.toLocaleString("id-ID")}</span>
         </h3>
       </div>
     </section>
