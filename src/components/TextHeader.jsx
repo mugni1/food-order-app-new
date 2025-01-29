@@ -34,19 +34,27 @@ export default function TextHeader() {
         </Link>
         <Link
           href="/seafoods"
-          className="py-2 px-3 text-base md:text-xl xl:text-2xl border border-slate-400 rounded-full text-nowrap text-slate-600"
+          className={`py-2 px-3 text-base md:text-xl xl:text-2xl border border-slate-400 rounded-full text-nowrap ${
+            path == "/seafoods" ? "bg-emerald-600 text-white" : "text-slate-600"
+          }`}
         >
           🦞 Seafoods
         </Link>
         <Link
           href="/appetizers"
-          className="py-2 px-3 text-base md:text-xl xl:text-2xl border border-slate-400 rounded-full text-nowrap text-slate-600"
+          className={`py-2 px-3 text-base md:text-xl xl:text-2xl border border-slate-400 rounded-full text-nowrap ${
+            path == "/appetizers"
+              ? "bg-emerald-600 text-white"
+              : "text-slate-600"
+          }`}
         >
           🍟 Appetizers
         </Link>
         <Link
           href="/drinks"
-          className="py-2 px-3 text-base md:text-xl xl:text-2xl border border-slate-400 rounded-full text-nowrap text-slate-600"
+          className={`py-2 px-3 text-base md:text-xl xl:text-2xl border border-slate-400 rounded-full text-nowrap ${
+            path == "/drinks" ? "bg-emerald-600 text-white" : "text-slate-600"
+          }`}
         >
           ☕ Drink
         </Link>
