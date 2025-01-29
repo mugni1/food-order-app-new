@@ -5,7 +5,7 @@ export default async function MealsPage() {
   const items = await getDrinks();
   return (
     <>
-      {items.length > 0 ? (
+      {items.data.length > 0 ? (
         <section className="w-full grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-5">
           {items.data.map((item) => (
             <CardImage
