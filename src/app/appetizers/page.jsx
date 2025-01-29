@@ -17,7 +17,7 @@ export default async function MealsPage() {
           ))}
         </section>
       ) : (
-        <h1 className="my-20 text-center w-full text-slate-600 text-xl">
+        <h1 className="my-20 text-center w-full text-slate-600 text-xl md:text-2xl xl:text-3xl">
           Belum ada products
         </h1>
       )}
