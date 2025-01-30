@@ -1,9 +1,9 @@
 import CardImage from "@/components/CardImage";
 import Container from "@/components/Container";
-import { getAllItems } from "@/services";
+import { getAllItems, getWithCategory } from "@/services";
 
 export default async function Home() {
-  const items = await getAllItems();
+  const items = await getWithCategory();
   return (
     <Container>
       {items.data.length > 0 ? (
