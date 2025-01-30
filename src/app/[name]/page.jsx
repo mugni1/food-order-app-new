@@ -2,8 +2,8 @@ import CardImage from "@/components/CardImage";
 import { getWithCategory } from "@/services";
 
 export default async function Page({ params }) {
-  const { id } = await params;
-  const items = await getWithCategory(id);
+  const { name } = await params;
+  const items = await getWithCategory(name);
   return (
     <main className="container mx-auto px-5">
       {items.data.length > 0 ? (
