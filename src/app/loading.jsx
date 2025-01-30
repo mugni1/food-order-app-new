@@ -5,7 +5,7 @@ export default function Loading() {
   ];
   return (
     <>
-      <section className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5 ">
+      <section className="w-full grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6  2xl:grid-cols-7  gap-5 container mx-auto px-5">
         {dataDumy.map((items, index) => (
           <section
             key={index}

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 export default function TextHeader() {
   const path = usePathname();
   return (
-    <>
+    <section className="container mx-auto px-5">
       <div className="flex flex-wrap flex-col my-10">
         <h1 className="text-4xl md:text-5xl xl:text-6xl font-bold text-slate-900">
           Find Your Best Food
@@ -61,6 +61,6 @@ export default function TextHeader() {
       <h1 className="text-xl md:text-2xl xl:text-3xl font-semibold mb-5 text-slate-900">
         Terbaru
       </h1>
-    </>
+    </section>
   );
 }
