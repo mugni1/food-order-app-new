@@ -1,4 +1,5 @@
 // import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import TextHeader from "@/components/TextHeader";
 import "./globals.css";
 // import { Poppins } from "next/font/google";
 
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`w-full px-5`}>
-        {/* <TextHeader /> */}
+        <TextHeader />
         {children}
       </body>
     </html>
