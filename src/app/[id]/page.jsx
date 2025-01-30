@@ -1,10 +1,13 @@
 import CardImage from "@/components/CardImage";
-import { getSeafoods } from "@/services";
+import TextHeader from "@/components/TextHeader";
+import { getWithCategory } from "@/services";
 
-export default async function MealsPage() {
-  const items = await getSeafoods();
+export default async function Page({ params }) {
+  const { id } = await params;
+  const items = await getWithCategory(id);
   return (
     <>
+      <TextHeader />
       {items.data.length > 0 ? (
         <section className="w-full grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-5">
           {items.data.map((item) => (

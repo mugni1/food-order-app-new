@@ -1,10 +1,12 @@
 import CardImage from "@/components/CardImage";
+import TextHeader from "@/components/TextHeader";
 import { getAllItems } from "@/services";
 
 export default async function Home() {
   const items = await getAllItems();
   return (
     <>
+      <TextHeader />
       {items.data.length > 0 ? (
         <section className="w-full grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 gap-5">
           {items.data.map((item) => (
