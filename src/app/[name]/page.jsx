@@ -1,8 +1,12 @@
 import CardImage from "@/components/CardImage";
+import NotFound from "@/components/NotFound";
 import { getWithCategory } from "@/services";
 
 export default async function Page({ params }) {
   const { name } = await params;
+  if (["meals", "seafoods", "appetizers", "drinks"].includes(name) == false) {
+    return <NotFound />;
+  }
   const items = await getWithCategory(name);
   return (
     <main className="container mx-auto px-5">
