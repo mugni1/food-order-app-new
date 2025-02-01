@@ -37,6 +37,9 @@ export default function LoginPage() {
       }
     })
       .then(res => {
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("name", res.data.data.name);
+        localStorage.setItem("email", res.data.data.email);
         swal({
           title: "Success",
           text: res.data.message,
@@ -48,11 +51,14 @@ export default function LoginPage() {
         });
       })
       .catch(error => {
-        swal({
-          title: "Error",
-          text: error.response.data.message,
-          icon: "error"
-        });
+        console.log(error);
+        if (error.response.status == 403) {
+          swal({
+            title: "Error",
+            text: error.response.data.message,
+            icon: "error"
+          });
+        }
       })
       .finally(() => {
         setLoadingSubmit(false);
