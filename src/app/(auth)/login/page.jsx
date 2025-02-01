@@ -4,6 +4,7 @@ import swal from "sweetalert";
 import Container from "@/components/Container";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState(null);
@@ -11,6 +12,8 @@ export default function LoginPage() {
   const [logoutAll, setLogoutAll] = useState(false);
   const [typePassword, setTypePassword] = useState(true);
   const [loadingSubmit, setLoadingSubmit] = useState(false);
+
+  const router = useRouter();
 
   const changeTypePassword = () => {
     event.preventDefault();
@@ -34,15 +37,17 @@ export default function LoginPage() {
       }
     })
       .then(res => {
-        console.log(res);
         swal({
           title: "Success",
           text: res.data.message,
           icon: "success"
+        }).then(isTrue => {
+          if (isTrue) {
+            router.push("/dashboard");
+          }
         });
       })
       .catch(error => {
-        console.log(error);
         swal({
           title: "Error",
           text: error.response.data.message,
