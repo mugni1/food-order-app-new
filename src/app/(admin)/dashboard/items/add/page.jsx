@@ -1,13 +1,25 @@
 "use client";
+import swal from "sweetalert";
 import axios from "axios";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AddItemsPage() {
   const [name, setName] = useState(null);
   const [price, setPrice] = useState(null);
   const [image, setImage] = useState(null);
-  const [category, setCategory] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [category, setCategory] = useState(1);
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+    setPreviewImage(URL.createObjectURL(file));
+  };
+
   const handleSubmit = () => {
     event.preventDefault();
     setLoading(true);
@@ -16,19 +28,32 @@ export default function AddItemsPage() {
       url: "http://localhost:8000/api/items",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "multipart/form-data",
       },
       data: {
         name: name,
         price: price,
         image: image,
-        category: category,
+        category_id: category,
       },
     })
       .then((res) => {
-        console.log(res);
+        swal({
+          title: "Success",
+          text: res.data.message,
+          icon: "success",
+        }).then((isTrue) => {
+          if (isTrue) {
+            router.push("/dashboard/items");
+          }
+        });
       })
       .catch((err) => {
-        console.log(err);
+        swal({
+          title: "Error",
+          text: err.response.data.message,
+          icon: "error",
+        });
       })
       .finally(() => {
         setLoading(false);
@@ -58,12 +83,20 @@ export default function AddItemsPage() {
           <input
             type="file"
             className="p-2 border w-full rounded-lg"
-            onChange={(e) => setImage(e.target.files[0])}
-            required
+            accept=".jpeg, .png, .jpg, .jfif, .webp"
+            onChange={handleFileChange}
           />
+          {previewImage != null && (
+            <img
+              src={previewImage}
+              className="w-1/2 mx-auto rounded-lg"
+              alt=""
+            />
+          )}
           <select
             className="p-2 border w-full rounded-lg"
             onChange={(e) => setCategory(e.target.value)}
+            value={category}
             required
           >
             <option value="1">Heavy Meals</option>

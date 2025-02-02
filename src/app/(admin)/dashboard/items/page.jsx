@@ -9,6 +9,7 @@ export default function ItemsPage() {
   const [items, setItems] = useState([]);
   const [filterItem, setFilterItems] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // search
   useEffect(() => {
@@ -23,10 +24,13 @@ export default function ItemsPage() {
     axios({
       method: "GET",
       url: "http://localhost:8000/api/items",
-    }).then((res) => {
-      setItems(res.data.data);
-      console.log(res.data.data);
-    });
+    })
+      .then((res) => {
+        setItems(res.data.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
   return (
     <main className="w-full">
@@ -56,7 +60,13 @@ export default function ItemsPage() {
             </tr>
           </thead>
           <tbody className="w-full">
-            {filterItem.length > 0 ? (
+            {loading ? (
+              <tr>
+                <td colSpan={5} className="text-center py-5 text-2xl">
+                  Loading...
+                </td>
+              </tr>
+            ) : filterItem.length > 0 ? (
               filterItem.map((item, index) => (
                 <tr className="w-full  border-b" key={item.id}>
                   <td className="w-1/12 text-center">{index + 1}</td>
