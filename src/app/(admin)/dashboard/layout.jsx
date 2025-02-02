@@ -1,45 +1,20 @@
+import SideBar from "@/components/dashboard/SideBar";
+import Username from "@/components/dashboard/Username";
 import Link from "next/link";
 
 export default function DashboardLayout({ children }) {
   return (
     <main className=" w-full flex flex-wrap">
-      <section
-        className="w-2/12 min-h-screen fixed flex flex-col"
-        style={{
-          boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-        }}
-      >
-        <h1 className="text-2xl font-semibold text-emerald-600 p-5 w-full text-center mb-5">
-          Food Ordering
-        </h1>
-        <ul className="w-full">
-          <li className="ps-5">
-            <Link
-              className=" w-full hover:bg-emerald-600  hover:text-white py-2"
-              href="/dashboard"
-            >
-              Home
-            </Link>
-          </li>
-          <li className="ps-5">
-            <Link
-              className=" w-full hover:bg-emerald-600  hover:text-white py-2"
-              href="/dashboard"
-            >
-              Items
-            </Link>
-          </li>
-          <li className="ps-5">
-            <Link
-              className=" w-full hover:bg-emerald-600  hover:text-white py-2"
-              href="/dashboard"
-            >
-              Orders
-            </Link>
-          </li>
-        </ul>
+      <SideBar />
+      <section className=" ms-auto w-10/12 flex flex-col">
+        <header className="w-full flex justify-between items-center h-20 px-5 sticky top-0 bg-slate-100">
+          <h1 className="text-2xl font-semibold">Dashboard</h1>
+          <div>
+            <Username />
+          </div>
+        </header>
+        <main className="p-5 bg-slate-100">{children}</main>
       </section>
-      <section className=" ms-auto p-5 w-10/12">{children}</section>
     </main>
   );
 }
