@@ -1,6 +1,6 @@
 "use client";
 
-import Button from "@/components/Button";
+import swal from "sweetalert";
 import axios from "axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -10,6 +10,42 @@ export default function ItemsPage() {
   const [filterItem, setFilterItems] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
+
+  //handle delete
+  const handleDelete = (id) => {
+    swal({
+      icon: "warning",
+      title: "Warning",
+      text: "Apakah Kamu yakin ingin menghapus item ini?",
+      buttons: ["Batal", "Hapus"],
+      dangerMode: true,
+    }).then((res) => {
+      if (res) {
+        axios({
+          method: "DELETE",
+          url: `http://localhost:8000/api/items/${id}`,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+          .then((res) => {
+            setItems(items.filter((item) => item.id !== id));
+            swal({
+              icon: "success",
+              title: "Success",
+              text: res.data.message,
+            });
+          })
+          .catch((err) => {
+            swal({
+              icon: "error",
+              title: "Error",
+              text: err.response.data.message,
+            });
+          });
+      }
+    });
+  };
 
   // search
   useEffect(() => {
@@ -56,7 +92,9 @@ export default function ItemsPage() {
               <th>Image</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Action</th>
+              <th className="w-2/12" colSpan={2}>
+                Action
+              </th>
             </tr>
           </thead>
           <tbody className="w-full">
@@ -84,7 +122,36 @@ export default function ItemsPage() {
                   <td className="text-center">
                     Rp {item.price.toLocaleString("id-ID")}
                   </td>
-                  <td>Delete</td>
+                  <td>
+                    <button
+                      onClick={() => handleDelete(item.id)}
+                      className="px-5 bg-red-600 ring-red-600 active:scale-95 py-2 text-white active:ring-2 ring-offset-2 rounded-lg font-semibold  transition-all ease-in-out"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        className="fill-current"
+                      >
+                        <path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm10.618-3L15 2H9L7.382 4H3v2h18V4z"></path>
+                      </svg>
+                    </button>
+                  </td>
+                  <td>
+                    <button className="px-5 bg-amber-600 ring-amber-600 active:scale-95 py-2 text-white active:ring-2 ring-offset-2 rounded-lg font-semibold  transition-all ease-in-out">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        className="fill-current"
+                      >
+                        <path d="m18.988 2.012 3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287-3-3L8 13z"></path>
+                        <path d="M19 19H8.158c-.026 0-.053.01-.079.01-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2V19z"></path>
+                      </svg>
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (

@@ -78,9 +78,9 @@ export default function ProfilePage() {
               className="w-3/12  mx-auto rounded-full"
             />
             <div className="w-8/12">
-              <p>Name : {name}</p>
-              <p>Email : {email}</p>
-              <p>Role : {role}</p>
+              <p className="line-clamp-1">Name : {name}</p>
+              <p className="line-clamp-1">Email : {email}</p>
+              <p className="line-clamp-1">Role : {role}</p>
             </div>
           </div>
           <button
