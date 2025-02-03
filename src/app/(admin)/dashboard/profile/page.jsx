@@ -1,5 +1,6 @@
 "use client";
 
+import swal from "sweetalert";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -49,6 +50,15 @@ export default function ProfilePage() {
       })
       .catch((err) => {
         console.log(err);
+        swal({
+          title: "Error",
+          text: err.response.data.message,
+          icon: "error",
+        }).then((isTrue) => {
+          if (isTrue) {
+            router.push("/login");
+          }
+        });
       })
       .finally(() => {
         setLoading(false);
@@ -59,13 +69,20 @@ export default function ProfilePage() {
       {loading ? (
         <section className="w-5/12 h-40 mx-auto border rounded-xl p-5 shadow-lg bg-slate-400 flex flex-col"></section>
       ) : (
-        <section className="w-5/12 mx-auto border rounded-xl p-5 shadow-lg bg-white flex flex-col">
-          <h1 className="font-semibold text-2xl mb-5 w-full text-center">
-            Profile
-          </h1>
-          <p>Name : {name}</p>
-          <p>Email : {email}</p>
-          <p>Role : {role}</p>
+        <section className="w-5/12 mx-auto border rounded-xl p-5 shadow-lg bg-white flex flex-col gap-5">
+          <h1 className="font-semibold text-2xl w-full text-center">Profile</h1>
+          <div className="w-full flex justify-between items-center">
+            <img
+              src="/no_image.svg"
+              alt=""
+              className="w-3/12  mx-auto rounded-full"
+            />
+            <div className="w-8/12">
+              <p>Name : {name}</p>
+              <p>Email : {email}</p>
+              <p>Role : {role}</p>
+            </div>
+          </div>
           <button
             onClick={handleLogout}
             disabled={loading}

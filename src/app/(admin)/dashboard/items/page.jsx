@@ -62,7 +62,10 @@ export default function ItemsPage() {
           <tbody className="w-full">
             {loading ? (
               <tr>
-                <td colSpan={5} className="text-center py-5 text-2xl">
+                <td
+                  colSpan={5}
+                  className="text-center py-5 text-2xl font-semibold"
+                >
                   Loading...
                 </td>
               </tr>
