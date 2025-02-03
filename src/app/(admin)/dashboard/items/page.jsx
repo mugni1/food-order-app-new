@@ -76,6 +76,7 @@ export default function ItemsPage() {
   }, []);
   return (
     <main className="w-full">
+      {/* section add and search item  */}
       <section className="w-full justify-between items-center flex">
         <Link
           className="px-5 bg-emerald-600 ring-emerald-600 active:scale-95 py-2 text-white active:ring-2 ring-offset-2 rounded-lg font-semibold  transition-all ease-in-out"
@@ -87,21 +88,26 @@ export default function ItemsPage() {
           <input
             type="text"
             onChange={(e) => setSearch(e.target.value)}
-            className="border rounded-lg py-2 px-2"
+            className="border rounded-lg py-2 ps-2 pe-10"
             placeholder="Search"
           />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            className="fill-slate-500 "
-          >
-            <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
-            <path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"></path>
-          </svg>
+          <div className="absolute top-0 bottom-0 right-2 h-full flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              className="fill-slate-500"
+            >
+              <path d="M10 18a7.952 7.952 0 0 0 4.897-1.688l4.396 4.396 1.414-1.414-4.396-4.396A7.952 7.952 0 0 0 18 10c0-4.411-3.589-8-8-8s-8 3.589-8 8 3.589 8 8 8zm0-14c3.309 0 6 2.691 6 6s-2.691 6-6 6-6-2.691-6-6 2.691-6 6-6z"></path>
+              <path d="M11.412 8.586c.379.38.588.882.588 1.414h2a3.977 3.977 0 0 0-1.174-2.828c-1.514-1.512-4.139-1.512-5.652 0l1.412 1.416c.76-.758 2.07-.756 2.826-.002z"></path>
+            </svg>
+          </div>
         </div>
       </section>
+      {/*end section add and search item  */}
+
+      {/* list items  */}
       <section className="w-full rounded-xl shadow-lg p-5 bg-white my-5">
         <table className="w-full">
           <thead>
@@ -109,6 +115,7 @@ export default function ItemsPage() {
               <th className="w-1/12 py-5">No</th>
               <th>Image</th>
               <th>Name</th>
+              <th>Kategori</th>
               <th>Price</th>
               <th className="w-2/12" colSpan={2}>
                 Action
@@ -131,9 +138,20 @@ export default function ItemsPage() {
                   </td>
                   <td className="text-center">{item.name}</td>
                   <td className="text-center">
+                    <span
+                      className={`py-2 px-5 text-sm rounded-lg shadow-md text-white font-semibold ${
+                        item.category.name == "heavy meals" && "bg-amber-500"
+                      } ${item.category.name == "seafoods" && "bg-green-600"} ${
+                        item.category.name == "drinks" && "bg-sky-600"
+                      } ${item.category.name == "appetizers" && "bg-red-600"}`}
+                    >
+                      {item.category.name}
+                    </span>
+                  </td>
+                  <td className="text-center">
                     Rp {item.price.toLocaleString("id-ID")}
                   </td>
-                  <td>
+                  <td className="text-center">
                     <Button
                       onClick={() => {
                         handleDelete(item.id);
@@ -151,10 +169,12 @@ export default function ItemsPage() {
                       </svg>
                     </Button>
                   </td>
-                  <td>
+                  <td className="text-center">
                     <Button
                       className="bg-amber-500 ring-amber-500"
-                      onClick={() => router.push(`/dashboard/items/${item.id}`)}
+                      onClick={() =>
+                        router.push(`/dashboard/items/edit/${item.id}`)
+                      }
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -176,6 +196,7 @@ export default function ItemsPage() {
           </tbody>
         </table>
       </section>
+      {/* end list items  */}
     </main>
   );
 }
