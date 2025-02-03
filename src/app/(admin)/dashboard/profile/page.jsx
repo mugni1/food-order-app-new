@@ -67,7 +67,7 @@ export default function ProfilePage() {
   return (
     <main className="w-full flex justify-center items-center">
       {loading ? (
-        <section className="w-5/12 h-40 mx-auto border rounded-xl p-5 shadow-lg bg-slate-400 flex flex-col"></section>
+        <section className="w-5/12 h-60 mx-auto border rounded-xl p-5 shadow-lg bg-slate-200 flex flex-col"></section>
       ) : (
         <section className="w-5/12 mx-auto border rounded-xl p-5 shadow-lg bg-white flex flex-col gap-5">
           <h1 className="font-semibold text-2xl w-full text-center">Profile</h1>
