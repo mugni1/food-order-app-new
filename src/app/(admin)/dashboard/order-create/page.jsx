@@ -1,12 +1,9 @@
 "use client";
 import axios from "axios";
 import swal from "sweetalert";
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-
-export default function DashboardPage() {
-  const router = useRouter();
-
+import router from "next/router";
+export default function OrderCreatePage() {
   useEffect(() => {
     if (localStorage.getItem("token") == null) {
       router.push("/login");
@@ -35,12 +32,5 @@ export default function DashboardPage() {
         });
     }
   }, []);
-  return (
-    <>
-      <main className="min-h-screen">
-        <h1>Ini Halaman Dashboard</h1>
-      </main>
-      <main className="min-h-screen"></main>
-    </>
-  );
+  return <h1> Creaet Order</h1>;
 }

@@ -29,41 +29,49 @@ export default function ProfilePage() {
         console.log(res);
       })
       .then((err) => {
-        console.log(err);
+        swal({
+          title: "Error",
+          text: err.response.data.message,
+          icon: "error",
+        });
       })
       .finally(() => {
         setLoadingBtn(false);
       });
   };
+
   useEffect(() => {
-    axios({
-      method: "GET",
-      url: "http://localhost:8000/api/profile",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    })
-      .then((res) => {
-        setName(res.data.data.name);
-        setEmail(res.data.data.email);
-        setRole(res.data.data.role.name);
+    if (localStorage.getItem("token") == null) {
+      router.push("/login");
+    }
+    if (localStorage.getItem("token") != null) {
+      axios({
+        method: "get",
+        url: "http://localhost:8000/api/profile",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        swal({
-          title: "Error",
-          text: err.response.data.message,
-          icon: "error",
-        }).then((isTrue) => {
-          if (isTrue) {
-            router.push("/login");
-          }
+        .then((res) => {
+          setName(res.data.data.name);
+          setEmail(res.data.data.email);
+          setRole(res.data.data.role.name);
+        })
+        .catch((err) => {
+          swal({
+            title: "Error",
+            text: err.response.data.message,
+            icon: "error",
+          });
+          localStorage.clear();
+          router.push("/login");
+        })
+        .finally(() => {
+          setLoading(false);
         });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    }
   }, []);
+
   return (
     <main className="w-full flex justify-center items-center">
       {loading ? (

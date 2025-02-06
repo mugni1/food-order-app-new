@@ -63,6 +63,32 @@ export default function ItemsPage() {
 
   // on mount all items
   useEffect(() => {
+    if (localStorage.getItem("token") == null) {
+      router.push("/login");
+    }
+    if (localStorage.getItem("token") != null) {
+      axios({
+        method: "get",
+        url: "http://localhost:8000/api/profile",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+        .then((res) => {
+          localStorage.setItem("name", res.data.data.name);
+          localStorage.setItem("email", res.data.data.email);
+          localStorage.setItem("role", res.data.data.role.name);
+        })
+        .catch((err) => {
+          swal({
+            title: "Error",
+            text: err.response.data.message,
+            icon: "error",
+          });
+          localStorage.clear();
+          router.push("/login");
+        });
+    }
     axios({
       method: "GET",
       url: "http://localhost:8000/api/items",
@@ -74,14 +100,25 @@ export default function ItemsPage() {
         setLoading(false);
       });
   }, []);
+
   return (
     <main className="w-full">
       {/* section add and search item  */}
       <section className="w-full justify-between items-center flex">
         <Link
-          className="px-5 bg-emerald-600 ring-emerald-600 active:scale-95 py-2 text-white active:ring-2 ring-offset-2 rounded-lg font-semibold  transition-all ease-in-out"
+          className="px-5 bg-emerald-600 ring-emerald-600 active:scale-95 py-2 text-white active:ring-2 ring-offset-2 rounded-lg font-semibold  transition-all ease-in-out flex items-center gap-2 shadow-lg"
           href="/dashboard/items/add"
         >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            className="fill-current"
+          >
+            <path d="m21.484 11.125-9.022-5a1 1 0 0 0-.968-.001l-8.978 4.96a1 1 0 0 0-.003 1.749l9.022 5.04a.995.995 0 0 0 .973.001l8.978-5a1 1 0 0 0-.002-1.749zm-9.461 4.73-6.964-3.89 6.917-3.822 6.964 3.859-6.917 3.853z"></path>
+            <path d="M12 22a.994.994 0 0 0 .485-.126l9-5-.971-1.748L12 19.856l-8.515-4.73-.971 1.748 9 5A1 1 0 0 0 12 22zm8-20h-2v2h-2v2h2v2h2V6h2V4h-2z"></path>
+          </svg>
           Add Items
         </Link>
         <div className="flex items-center relative text-slate-500 h-20">
@@ -148,7 +185,7 @@ export default function ItemsPage() {
                       {item.category.name}
                     </span>
                   </td>
-                  <td className="text-center">
+                  <td className="text-center font-semibold">
                     Rp {item.price.toLocaleString("id-ID")}
                   </td>
                   <td className="text-center">

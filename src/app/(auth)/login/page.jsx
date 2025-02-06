@@ -3,7 +3,7 @@ import axios from "axios";
 import swal from "sweetalert";
 import Container from "@/components/Container";
 import Link from "next/link";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -14,7 +14,6 @@ export default function LoginPage() {
   const [loadingSubmit, setLoadingSubmit] = useState(false);
 
   const router = useRouter();
-
   const changeTypePassword = () => {
     event.preventDefault();
     setTypePassword(!typePassword);
@@ -40,6 +39,7 @@ export default function LoginPage() {
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("name", res.data.data.name);
         localStorage.setItem("email", res.data.data.email);
+        localStorage.setItem("role", res.data.data.role.name);
         swal({
           title: "Success",
           text: res.data.message,
@@ -71,6 +71,10 @@ export default function LoginPage() {
         setLoadingSubmit(false);
       });
   };
+
+  useEffect(() => {
+    localStorage.getItem("token") != null && router.push("/dashboard");
+  }, []);
 
   return (
     <Container>
