@@ -2,11 +2,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { TableHead } from "./TableHead";
+import { useRouter } from "next/navigation";
 
 export default function OrderListPage() {
   // state
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const router = useRouter();
 
   // get order list from api
   useEffect(() => {
@@ -81,7 +84,15 @@ export default function OrderListPage() {
                     </button>
                   </td>
                   <td className="border-b py-5 px-2 text-center">
-                    <button className=" font-semibold text-white bg-sky-500 p-2 rounded-full active:bg-sky-700 active:scale-95 transition-all ease-in-out">
+                    <button
+                      onClick={() => {
+                        router.push(
+                          "http://localhost:3000/dashboard/order-list/" +
+                            order.id
+                        );
+                      }}
+                      className=" font-semibold text-white bg-sky-500 p-2 rounded-full active:bg-sky-700 active:scale-95 transition-all ease-in-out"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
