@@ -10,7 +10,7 @@ export default function OrderCreatePage() {
   const [items, setItems] = useState([]);
   const [carts, setCarts] = useState([]);
   const [customerName, setCustomerName] = useState("");
-  const [tableNo, setTableNo] = useState(0);
+  const [tableNo, setTableNo] = useState(null);
   const [loadingOrder, setLoadingOrder] = useState(false);
 
   function handleAddCart(id) {
@@ -55,6 +55,9 @@ export default function OrderCreatePage() {
       },
     })
       .then((res) => {
+        setCarts([]);
+        setTableNo(null);
+        setCustomerName("");
         swal({
           title: "Success",
           text: res.data.message,
@@ -157,7 +160,7 @@ export default function OrderCreatePage() {
       )}
       {/* end content center */}
       {/* cart right side */}
-      <section className="fixed top-20 right-0 bottom-0 w-3/12 bg-amber-500 p-5 flex flex-col text-white">
+      <section className="fixed overflow-y-scroll scrollbar-none top-20 right-0 bottom-0 w-3/12 bg-amber-500 p-5 flex flex-col text-white">
         <h1 className="font-semibold text-white text-2xl mb-2">Order List</h1>
         <input
           type="text"
@@ -218,7 +221,9 @@ export default function OrderCreatePage() {
         <span className="font-semibold  text-2xl mb-2">
           Total : Rp {total.toLocaleString("id-ID")}
         </span>
-        <Button onClick={() => handleOrder()}>Order Now</Button>
+        <Button onClick={() => handleOrder()}>
+          {loadingOrder ? "Please wait.." : "Order now"}
+        </Button>
       </section>
       {/* end cart right side  */}
     </main>
