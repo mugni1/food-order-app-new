@@ -10,7 +10,7 @@ export default function OrderCreatePage() {
   const [items, setItems] = useState([]);
   const [carts, setCarts] = useState([]);
   const [customerName, setCustomerName] = useState("");
-  const [tableNo, setTableNo] = useState(null);
+  const [tableNo, setTableNo] = useState(undefined);
   const [loadingOrder, setLoadingOrder] = useState(false);
 
   function handleAddCart(id) {
@@ -56,7 +56,7 @@ export default function OrderCreatePage() {
     })
       .then((res) => {
         setCarts([]);
-        setTableNo(null);
+        setTableNo(undefined);
         setCustomerName("");
         swal({
           title: "Success",
