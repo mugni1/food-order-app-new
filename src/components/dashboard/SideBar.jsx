@@ -1,9 +1,15 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SideBar() {
+  const [role, setRole] = useState(null);
   const pathname = usePathname();
+
+  useEffect(() => {
+    setRole(localStorage.getItem("role"));
+  }, []);
   return (
     <section
       className="w-2/12 min-h-screen fixed flex flex-col bg-white"
@@ -54,29 +60,29 @@ export default function SideBar() {
             Profile
           </Link>
         </li>
-       {localStorage.getItem("role") == "manager" && (
+        {role == "manager" && (
           <li className="w-full px-5">
-          <Link
-            className={` rounded-xl py-2 px-4 w-full flex items-center gap-1 font-semibold hover:ring-1 ring-amber-400 transition-all ease-in-out ${
-              pathname == "/dashboard/items" &&
-              "bg-amber-400 text-white shadow-md"
-            }`}
-            href="/dashboard/items"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              className="fill-current"
+            <Link
+              className={` rounded-xl py-2 px-4 w-full flex items-center gap-1 font-semibold hover:ring-1 ring-amber-400 transition-all ease-in-out ${
+                pathname == "/dashboard/items" &&
+                "bg-amber-400 text-white shadow-md"
+              }`}
+              href="/dashboard/items"
             >
-              <path d="M21 10a3.58 3.58 0 0 0-1.8-3 3.66 3.66 0 0 0-3.63-3.13 3.86 3.86 0 0 0-1 .13 3.7 3.7 0 0 0-5.11 0 3.86 3.86 0 0 0-1-.13A3.66 3.66 0 0 0 4.81 7 3.58 3.58 0 0 0 3 10a1 1 0 0 0-1 1 10 10 0 0 0 5 8.66V21a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1.34A10 10 0 0 0 22 11a1 1 0 0 0-1-1zM5 10a1.59 1.59 0 0 1 1.11-1.39l.83-.26-.16-.85a1.64 1.64 0 0 1 1.66-1.62 1.78 1.78 0 0 1 .83.2l.81.45.5-.77a1.71 1.71 0 0 1 2.84 0l.5.77.81-.45a1.78 1.78 0 0 1 .83-.2 1.65 1.65 0 0 1 1.67 1.6l-.16.85.82.28A1.59 1.59 0 0 1 19 10z"></path>
-            </svg>{" "}
-            Items
-          </Link>
-        </li>
-       )}
-        {localStorage.getItem("role") == "waiter" && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                className="fill-current"
+              >
+                <path d="M21 10a3.58 3.58 0 0 0-1.8-3 3.66 3.66 0 0 0-3.63-3.13 3.86 3.86 0 0 0-1 .13 3.7 3.7 0 0 0-5.11 0 3.86 3.86 0 0 0-1-.13A3.66 3.66 0 0 0 4.81 7 3.58 3.58 0 0 0 3 10a1 1 0 0 0-1 1 10 10 0 0 0 5 8.66V21a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1.34A10 10 0 0 0 22 11a1 1 0 0 0-1-1zM5 10a1.59 1.59 0 0 1 1.11-1.39l.83-.26-.16-.85a1.64 1.64 0 0 1 1.66-1.62 1.78 1.78 0 0 1 .83.2l.81.45.5-.77a1.71 1.71 0 0 1 2.84 0l.5.77.81-.45a1.78 1.78 0 0 1 .83-.2 1.65 1.65 0 0 1 1.67 1.6l-.16.85.82.28A1.59 1.59 0 0 1 19 10z"></path>
+              </svg>{" "}
+              Items
+            </Link>
+          </li>
+        )}
+        {role == "waiter" && (
           <li className="w-full px-5">
             <Link
               className={` rounded-xl py-2 px-4 w-full flex items-center gap-1 font-semibold hover:ring-1 ring-amber-400 transition-all ease-in-out ${
@@ -94,10 +100,30 @@ export default function SideBar() {
               >
                 <path d="M12 22a2.98 2.98 0 0 0 2.818-2H9.182A2.98 2.98 0 0 0 12 22zm8.707-5.707L19 14.586V10c0-3.217-2.185-5.926-5.145-6.743C13.562 2.52 12.846 2 12 2s-1.562.52-1.855 1.258C7.185 4.074 5 6.783 5 10v4.586l-1.707 1.707A.997.997 0 0 0 3 17v1a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-1a.997.997 0 0 0-.293-.707zM16 12h-3v3h-2v-3H8v-2h3V7h2v3h3v2z"></path>
               </svg>
-              Create Order
+              Order Create
             </Link>
           </li>
         )}
+        <li className="w-full px-5">
+          <Link
+            className={` rounded-xl py-2 px-4 w-full flex items-center gap-1 font-semibold hover:ring-1 ring-amber-400 transition-all ease-in-out ${
+              pathname == "/dashboard/order-list" &&
+              "bg-amber-400 text-white shadow-md "
+            }`}
+            href="/dashboard/order-list"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              className="fill-current"
+            >
+              <path d="M4 6h2v2H4zm0 5h2v2H4zm0 5h2v2H4zm16-8V6H8.023v2H18.8zM8 11h12v2H8zm0 5h12v2H8z"></path>
+            </svg>
+            Order List
+          </Link>
+        </li>
       </ul>
     </section>
   );
