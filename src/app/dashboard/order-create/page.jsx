@@ -172,7 +172,7 @@ export default function OrderCreatePage() {
         <input
           type="number"
           className="w-full p-2 rounded-lg shadow-md mb-2 text-slate-600"
-          placeholder="No Table"
+          placeholder="Table Number"
           value={tableNo}
           onChange={(e) => setTableNo(e.target.value)}
         />

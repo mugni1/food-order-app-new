@@ -3,19 +3,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { TableHead } from "./TableHead";
 import { useRouter } from "next/navigation";
+import Button from "@/components/Button";
 
 export default function OrderListPage() {
   // state
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // router
   const router = useRouter();
 
   // get order list from api
   useEffect(() => {
     axios({
       method: "GET",
-      url: "http://localhost:8000/api/orders",
+      url: "http://localhost:8000/api/orders/ready",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -56,7 +58,7 @@ export default function OrderListPage() {
                         order.status == "ordered" && "bg-red-500"
                       } ${order.status == "ready" && "bg-amber-500"} ${
                         order.status == "paid" && "bg-emerald-500"
-                      }`}
+                      } ${order.status == "delivered" && "bg-sky-500"}`}
                     >
                       {order.status}
                     </span>
@@ -69,19 +71,6 @@ export default function OrderListPage() {
                   </td>
                   <td className="border-b py-5 text-center">
                     {order.order_time}
-                  </td>
-                  <td className="border-b py-5 px-2 text-center">
-                    <button className=" font-semibold text-white bg-red-500 p-2 rounded-full active:bg-red-700 active:scale-95 transition-all ease-in-out">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        className="fill-current"
-                      >
-                        <path d="M6 7H5v13a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7H6zm10.618-3L15 2H9L7.382 4H3v2h18V4z"></path>
-                      </svg>
-                    </button>
                   </td>
                   <td className="border-b py-5 px-2 text-center">
                     <button
