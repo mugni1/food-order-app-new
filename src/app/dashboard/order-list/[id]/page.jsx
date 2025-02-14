@@ -55,42 +55,21 @@ export default function OrderDetailPage() {
     );
   }
   return (
-    <main className="w-full flex flex-col">
-      <h1 className="font-semibold text-2xl text-center">
-        Detail order for {order.customer_name}
-      </h1>
-      <h1 className="font-semibold text-xl text-center">
-        and table no {order.table_no}
-      </h1>
-      <section className="w-full p-5 rounded-xl shadow-lg  bg-white">
-        <table className="w-full">
-          <thead className="w-full border-b ">
-            <tr className="w-full ">
-              <th className="py-5 w-3/12">IMAGE</th>
-              <th>NAME</th>
-              <th>CATEGORY</th>
-              <th>PRICE</th>
-              <th>QTY</th>
-            </tr>
-          </thead>
-          <tbody>
-            {order.order_details.map((item) => (
-              <tr className=" border-b py-5" key={item.id}>
-                <td className="text-center py-5 w-2/12">
-                  <img
-                    src={`http://localhost:8000/storage/images/${item.item.image}`}
-                    alt=""
-                    className=" h-40 rounded-xl shadow-md  mx-auto"
-                  />
-                </td>
-                <td className="text-center">{item.item.name}</td>
-                <td className="text-center">{item.item.category.name}</td>
-                <td className="text-center">{item.price}</td>
-                <td className="text-center">{item.qty}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+    <main className="w-full grid grid-cols-2 gap-5">
+      <section className="bg-white rounded-xl shadow-lg columns-1 overflow-hidden">
+        <div className="w-full py-2 bg-emerald-600 font-bold text-white px-5">
+          <h2 className="text-2xl">Order is {order.status}</h2>
+        </div>
+        <div className="w-full p-5 font-semibold flex flex-col text-slate-700">
+          <h2>Customer Name : {order.customer_name}</h2>
+          <h2>Table Number : {order.table_no}</h2>
+          <h2>Order Date : {order.order_date}</h2>
+          <h2>Order Time : {order.order_time}</h2>
+          <h2>Waiter : {order.waiter.name}</h2>
+        </div>
+      </section>
+      <section className="bg-white rounded-xl shadow-lg py-5 columns-1">
+        Tes
       </section>
     </main>
   );
