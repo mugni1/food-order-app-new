@@ -10,7 +10,7 @@ export default function OrderCreatePage() {
   const [items, setItems] = useState([]);
   const [carts, setCarts] = useState([]);
   const [customerName, setCustomerName] = useState("");
-  const [tableNo, setTableNo] = useState(undefined);
+  const [tableNo, setTableNo] = useState("");
   const [loadingOrder, setLoadingOrder] = useState(false);
 
   function handleAddCart(id) {

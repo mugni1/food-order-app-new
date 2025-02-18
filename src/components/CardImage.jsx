@@ -16,9 +16,14 @@ export default function CardImage({ image, name, price }) {
         <h3 className="line-clamp-1 w-full text-center text-lg font-semibold text-slate-800">
           {name}
         </h3>
-        <h3 className="flex text-slate-900 font-semibold text-lg gap-1 items-center">
+        <h3 className="flex text-slate-900 font-semibold text-lg gap-1 items-end">
           <span className=" text-emerald-600">Rp</span>
-          <span className="text-xl">{price.toLocaleString("id-ID")}</span>
+          <span className="text-xl flex items-center">
+            <span className="text-2xl">
+              {price.toLocaleString("id-ID").split(".")[0]}.
+            </span>
+            <span>{price.toLocaleString("id-ID").split(".").pop()}</span>
+          </span>
         </h3>
       </div>
     </section>

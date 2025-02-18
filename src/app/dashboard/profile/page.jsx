@@ -28,12 +28,13 @@ export default function ProfilePage() {
         router.push("/login");
         console.log(res);
       })
-      .then((err) => {
+      .catch((err) => {
         swal({
           title: "Error",
           text: err.response.data.message,
           icon: "error",
         });
+        console.log(err);
       })
       .finally(() => {
         setLoadingBtn(false);
