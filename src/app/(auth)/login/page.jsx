@@ -122,7 +122,7 @@ export default function LoginPage() {
               type="email"
               onChange={(e) => setEmail(e.target.value)}
               value={email}
-              className="w-full border rounded-full pe-5 ps-10 py-2 shadow-md"
+              className="w-full border rounded-full pe-5 ps-10 py-2 shadow-md outline-amber-600 outline-1"
               placeholder="Email"
             />
           </div>
@@ -179,7 +179,7 @@ export default function LoginPage() {
               type={typePassword ? "password" : "text"}
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              className="w-full border rounded-full pe-5 ps-10 py-2 shadow-md"
+              className="w-full border rounded-full pe-5 ps-10 py-2 shadow-md outline-amber-600 outline-1"
               placeholder="Password"
             />
           </div>
@@ -200,7 +200,7 @@ export default function LoginPage() {
           {/* btn sign in  */}
           <button
             type="submit"
-            className="py-2 px-5 bg-emerald-500 font-semibold text-white rounded-full shadow-lg"
+            className="py-2 px-5 bg-gradient-to-r from-amber-600 to-red-500 font-semibold text-white rounded-full shadow-lg active:scale-90 transition-all ease-in-out"
           >
             Sign In
           </button>
