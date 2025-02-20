@@ -77,11 +77,12 @@ export default function LoginPage() {
 
   return (
     <main className=" w-full flex">
+      {/* left side  */}
       <section
         style={{
           backgroundImage: `url("/bgmakananlogin.jpeg")`,
         }}
-        className="w-7/12  min-h-screen bg-cover bg-center"
+        className="hidden md:block w-7/12  min-h-screen bg-cover bg-center"
       >
         <div className="w-full h-full backdrop-blur-md backdrop-brightness-75">
           <div className="w-8/12 mx-auto text-white flex flex-col justify-center h-full">
@@ -95,7 +96,9 @@ export default function LoginPage() {
           </div>
         </div>
       </section>
-      <section className="w-5/12 min-h-screen bg-white flex flex-col justify-center items-center">
+      {/* edn left side  */}
+      {/* form login  */}
+      <section className="  w-full md:w-5/12 min-h-screen bg-white flex flex-col justify-center items-center">
         <h1 className="font-semibold text-4xl w-8/12 mx-auto mb-5">Sign In</h1>
         <form
           onSubmit={handleSubmit}
@@ -124,6 +127,7 @@ export default function LoginPage() {
               value={email}
               className="w-full border rounded-full pe-5 ps-10 py-2 shadow-md outline-amber-600 outline-1"
               placeholder="Email"
+              required
             />
           </div>
           {/* end input email  */}
@@ -181,6 +185,7 @@ export default function LoginPage() {
               value={password}
               className="w-full border rounded-full pe-5 ps-10 py-2 shadow-md outline-amber-600 outline-1"
               placeholder="Password"
+              required
             />
           </div>
           {/* end input password  */}
@@ -202,7 +207,7 @@ export default function LoginPage() {
             type="submit"
             className="py-2 px-5 bg-gradient-to-r from-amber-600 to-red-500 font-semibold text-white rounded-full shadow-lg active:scale-90 transition-all ease-in-out"
           >
-            Sign In
+            {loadingSubmit ? "Please wait.." : "Sign In"}
           </button>
           {/* end btn sign in  */}
           <Link className="w-full text-center" href="/">
@@ -210,6 +215,7 @@ export default function LoginPage() {
           </Link>
         </form>
       </section>
+      {/* end form login  */}
     </main>
   );
 }
