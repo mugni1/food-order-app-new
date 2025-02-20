@@ -12,3 +12,18 @@ export default function Button({
     </button>
   );
 }
+
+export function ButtonLink({
+  className = "first-letter:",
+  children,
+  onClick = () => {},
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`px-5 active:scale-90 py-2 text-base border border-amber-500 rounded-lg font-semibold  transition-all ease-in-out text-nowrap ${className}`}
+    >
+      {children}
+    </button>
+  );
+}
