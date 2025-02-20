@@ -6,6 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function HomeContent() {
+  const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
   const [items, setItems] = useState([]);
   const [cloneItems, setCloneItems] = useState([]);
@@ -65,6 +66,9 @@ export default function HomeContent() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
   return (
@@ -101,6 +105,7 @@ export default function HomeContent() {
             className="border py-2 px-5 rounded-full w-full border-slate-500"
             onChange={(e) => setKeyword(e.target.value)}
             value={keyword}
+            placeholder="Search products..."
           />
         </section>
         {/* end search leywords  */}
@@ -147,7 +152,9 @@ export default function HomeContent() {
       {/* end header  */}
 
       {/* list items  */}
-      {items.length > 0 ? (
+      {loading ? (
+        <h1 className="font-semibold">Loading...</h1>
+      ) : items.length > 0 ? (
         <section className="w-full grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6  2xl:grid-cols-7  gap-5">
           {items.map((item) => (
             <CardImage
