@@ -83,7 +83,7 @@ export default function LoginPage() {
         }}
         className="w-7/12  min-h-screen bg-cover bg-center"
       >
-        <div className="w-full h-full backdrop-blur-sm backdrop-brightness-75">
+        <div className="w-full h-full backdrop-blur-md backdrop-brightness-75">
           <div className="w-8/12 mx-auto text-white flex flex-col justify-center h-full">
             <h1 className="font-semibold text-4xl">Welcome Back</h1>
             <p>

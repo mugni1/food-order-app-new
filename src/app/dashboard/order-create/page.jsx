@@ -133,11 +133,13 @@ export default function OrderCreatePage() {
         </div>
       ) : (
         <section className=" w-8/12 grid grid-cols-4 gap-5">
+          {/* card  */}
           {items.map((item) => (
             <div
               key={item.id}
               className=" columns-1  bg-white rounded-lg shadow-md overflow-hidden flex flex-col"
             >
+              {/* card header  */}
               <div className="h-40 w-full">
                 <img
                   src={`http://localhost:8000/storage/images/${item.image}`}
@@ -145,17 +147,28 @@ export default function OrderCreatePage() {
                   className="h-full w-full object-cover object-center"
                 />
               </div>
-              <div className="p-5 flex flex-col w-full gap-3">
-                <b className="line-clamp-1 w-full text-lg">{item.name}</b>
-                <b className="line-clamp-1 w-full">
-                  Rp {item.price.toLocaleString("id-ID")}
+              {/* end card header  */}
+              {/* card body  */}
+              <div className="px-5 pb-5 pt-2 flex flex-col w-full gap-1">
+                <b className="line-clamp-1 w-full text-base">{item.name}</b>
+                <b className="line-clamp-1 w-full flex items-center">
+                  <span className="font-normal me-1">Rp </span>
+                  <span className="font-semibold text-xl">
+                    {item.price.toLocaleString("id-ID").split(".")[0]}
+                  </span>
+                  .
+                  <span className="font-normal">
+                    {item.price.toLocaleString("id-ID").split(".").pop()}
+                  </span>
                 </b>
                 <Button onClick={() => handleAddCart(item.id)}>
                   Add Chart
                 </Button>
               </div>
+              {/* end card body  */}
             </div>
           ))}
+          {/* end card  */}
         </section>
       )}
       {/* end content center */}
