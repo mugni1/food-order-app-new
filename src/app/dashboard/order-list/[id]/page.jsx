@@ -76,7 +76,7 @@ export default function OrderDetailPage() {
       </section>
       <section className="bg-white rounded-xl shadow-lg p-5 columns-1 flex flex-col">
         {order.order_details.map((order) => (
-          <div key={order.id} className="flex gap-5">
+          <div key={order.id} className="flex gap-5 mb-5">
             <div className="w-3/12 ">
               <img
                 src={"http://localhost:8000/storage/images/" + order.item.image}
@@ -86,19 +86,20 @@ export default function OrderDetailPage() {
             </div>
             <div className="flex flex-col justify-center">
               <h1 className="font-semibold text-xl">{order.item.name}</h1>
-              <span>
+              <div>
                 Rp
-                <span className="font-semibold text-red-500 text-xl">
+                <span className="font-semibold text-xl">
                   {order.price.toLocaleString("id-ID").split(".")[0]}
                 </span>
-                .{order.price.toLocaleString("id-ID").split(".").pop()}
-              </span>
-              <span>
-                QTY :{" "}
-                <span className="font-semibold text-emerald-500 text-xl">
-                  {order.qty}
+                .
+                <span>
+                  {order.price.toLocaleString("id-ID").split(".").pop()}
                 </span>
-              </span>
+              </div>
+              <div>
+                <span>QTY : </span>
+                <span className="font-semibold text-xl">{order.qty}</span>
+              </div>
             </div>
           </div>
         ))}

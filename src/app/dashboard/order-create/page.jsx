@@ -151,7 +151,7 @@ export default function OrderCreatePage() {
               {/* card body  */}
               <div className="px-5 pb-5 pt-2 flex flex-col w-full gap-1">
                 <b className="line-clamp-1 w-full text-base">{item.name}</b>
-                <b className="line-clamp-1 w-full flex items-center">
+                <div className="line-clamp-1 w-full flex items-end">
                   <span className="font-normal me-1">Rp </span>
                   <span className="font-semibold text-xl">
                     {item.price.toLocaleString("id-ID").split(".")[0]}
@@ -160,7 +160,7 @@ export default function OrderCreatePage() {
                   <span className="font-normal">
                     {item.price.toLocaleString("id-ID").split(".").pop()}
                   </span>
-                </b>
+                </div>
                 <Button onClick={() => handleAddCart(item.id)}>
                   Add Chart
                 </Button>
