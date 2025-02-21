@@ -3,7 +3,7 @@ export function TableHead() {
     <thead className="w-full">
       <tr className="w-full">
         <th className="border-b py-2">Customer Name</th>
-        <th className="border-b py-2">Table</th>
+        <th className="border-b py-2">Table Number</th>
         <th className="border-b py-2">Status</th>
         <th className="border-b py-2">Total</th>
         <th className="border-b py-2">Date</th>
